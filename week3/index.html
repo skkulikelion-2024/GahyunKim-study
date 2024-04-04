@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const root = document.getElementById("root");
+    
+        const Title = () => (
+            <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+                Hello I'm a title
+            </h3>
+        );
+
+        const Button = () => (
+            <button style={{
+            backgroundColor: "tomato",
+            }}
+             onClick = {() => console.log("im clicked")}
+            >
+            Click me
+            </button>
+        );
+
+        // constant 이름은 HTML 태그 이름과 반드시 일치할 필요 없음
+        const btn = React.createElement("button", {
+            // 속성으로 event listener를 줌
+            onClick: () => console.log('im clicked'),
+            style: {
+                backgroundColor: "tomato",
+            }
+        }, "Click me");
+
+        const Container = (
+            <div>
+                <Title />
+                <Button />
+            </div>
+        );
+
+        // React DOM은 모든 React element들을 HTML body 안에 들 수 있도록 해줌
+        // render: 이 리액트 엘리먼트를 HTML으로 만들어 배치한다 (사용자에세 보이도록 한다)
+        ReactDOM.render(Container, root);    // span을 root 안에 render
+    </script>
+</html>
