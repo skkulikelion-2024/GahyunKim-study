@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    // 리액트 컴포넌트 App 정의
+    function App() {
+      // input 태그에 입력된 값과 그 값이 들어가는 list를 state로 구현 
+      // 두개의 state 필요 [상태 이름, 상태 업데이트하는 함수]
+      // useState 뒤의 괄호 안에 초기값 지정
+      const [list, setList] = React.useState(["초콜릿", "사탕"]);
+      const [value, setValue] = React.useState("");
+      
+      // setState 형태의 함수를 부르는 inputHandler, clickHandler 함수
+      // 사용자 입력을 처리하고 상태를 업데이트함
+      
+      // 입력하면서 발생한 이벤트 e 처리
+			const inputHandler = (e) => {
+          setInput(e.target.value); // target.value로 입력된 값을 가져옴
+          // setInput 함수를 사용해 가져온 값을 컴포넌트의 value 상태에 설정함
+          // 사용자가 텍스트 입력할 때마다 함수가 호출되어 value 상태 업데이트 함
+      };
+
+      // 버튼 클릭할 때마다 입력값이 리스트에 추가 됨
+      const clickHandler = (e) => {
+          setList((prev) => [value, ...prev]); // setList 함수 호출해 리스트 상태 업데이트함
+          // 이전 상태 prev를 기반으로 새로운 리스트 생성
+          // 새로운 리스트는 기존 리스트의 앞에 입력 필드에서 입력된 값value를 추가한 형태로 구성
+      };
+      
+      return (
+        <div>
+          {/* input, button 태그 렌더링, 상태와 eventHandler 바인딩 */}
+          {/* 입력값이 변경될 때마다 onChange 이벤트 핸들러에 의해 inputHandler 함수 호출됨 */}
+          {/* 입력 필드의 현재 값 value 상태로 설정되어 있음 (입력 필드의 값과 상태 동기화) */}
+          <input type={"text"} onChange={inputHandler} value={value}></input>
+
+          {/* 버튼 클릭할 때마다 onClick 이벤트 핸들러에 의해 clickHandler */}
+          <button onClick={clickHandler}>추가</button>
+
+          {/* 리스트 항목 렌더링 */}
+          <ul>
+            {/* list 배열의 각 항목 매핑하여 ul 리스트로 렌더링함 */}
+            {/* 각 리스트 요소는 key 속성을 사용해 고유한 식별자를 가짐 (여기서는 idx) */}
+            {/* 리스트 아이템은 배열의 해당 항목 item을 텍스트로 표시함 */}
+            {list.map((item, idx) => ( 
+              <li key={idx}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
+
+    // 리액트 application 렌더링
+    // html 문서 내에서 id가 root인 요소에 react application이 렌더링 될것임
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>

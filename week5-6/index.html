@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    // 컴포넌트란 JSX를 리턴하는 함수
+    // 괄호 안의 인자 이름 props
+    // props는 <Btn> 태그 안에 넣은 모든 걸 가지는 object
+    function Btn({ text, fontSize = 16}) {  // 디폴트값 넣어주기
+        return (
+            <button 
+                style={{
+                    backgroundColor: "pink",
+                    color: "white",
+                    padding: "10px 20px",
+                    border: 0,
+                    borderRadius: 7,
+                    fontSize: fontSize,
+                }}
+            >
+                {text}
+        </button>);
+    }
+
+    Btn.propTypes = {
+        text: PropTypes.string.isRequired,
+        fontSize: PropTypes.number,
+    };
+
+    function App() {
+        return (
+            <div>   {/*함수들을 불러내서 렌더링 함*/}
+                <Btn text="Save Changes" fontSize={18}/>
+                <Btn text={"Continue"} />
+            </div>
+        );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+</script>
+</html>
