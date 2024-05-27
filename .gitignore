@@ -1,2 +1,4 @@
 .DS_Store
 node_modules/
+week10/learn-nextJS/node_modules
+week10/learn-nextJS/node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node
